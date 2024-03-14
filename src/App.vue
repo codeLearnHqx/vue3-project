@@ -4,7 +4,11 @@
   </div>
 </template>
 <script setup lang="ts">
-const str = '我爱祖国'
+var str = '我爱祖国11111111111'
+const fun = () => {
+  console.log(111111)
+}
+fun()
 </script>
 
 <style lang="scss" scoped>
