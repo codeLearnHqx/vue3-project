@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 const fun = () => {
-  console.log(111111)
+  console.log(11111222222222222222221)
 }
 fun()
 </script>
