@@ -4,7 +4,6 @@
   </div>
 </template>
 <script setup lang="ts">
-var str = '我爱祖国11111111111'
 const fun = () => {
   console.log(111111)
 }
