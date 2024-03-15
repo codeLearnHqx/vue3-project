@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>App根组件</h1>
+    <h1>分页器全局组件</h1>
   </div>
 </template>
 
