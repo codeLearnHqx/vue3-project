@@ -4,4 +4,6 @@ import { RouteRecordRaw } from 'vue-router'
 export interface UserState {
   token: string
   menuRoutes: RouteRecordRaw[]
+  username: string | undefined
+  avatar: string | undefined
 }

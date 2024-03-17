@@ -17,7 +17,7 @@ export interface LoginResponseData {
 /**
  * 用户信息接口
  */
-interface UserInfo {
+export interface UserInfo {
   userId: number
   avatar: string
   username: string

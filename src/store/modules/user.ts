@@ -1,8 +1,12 @@
-import { reqLogin } from '@/api/user'
-import type { LoginForm, LoginResponseData } from '@/api/user/type'
+import { reqLogin, reqUserInfo } from '@/api/user'
+import type {
+  LoginForm,
+  LoginResponseData,
+  UserResponseData,
+} from '@/api/user/type'
 import { defineStore } from 'pinia'
 import { UserState } from './types/type'
-import { GET_TOKEN, SET_TOKEN } from '@/utils/token'
+import { GET_TOKEN, REMOVE_TOKEN, SET_TOKEN } from '@/utils/token'
 
 // 常量路由
 import { constantRoute } from '@/router/routes'
@@ -12,6 +16,8 @@ const useUserStore = defineStore('User', {
     return {
       token: GET_TOKEN() ?? '', // 用户唯一标识
       menuRoutes: constantRoute, // 菜单路由数组
+      username: '',
+      avatar: '',
     }
   },
   actions: {
@@ -32,6 +38,30 @@ const useUserStore = defineStore('User', {
         // 登录失败 201 -> 登录失败信息
         return Promise.reject(res.data.message)
       }
+    },
+    /**
+     * 获取用户信息
+     */
+    async userInfo() {
+      const res: UserResponseData = await reqUserInfo()
+      if (res.code === 200) {
+        this.username = res.data.checkUser?.username
+        this.avatar = res.data.checkUser?.avatar
+        return 'ok'
+      } else {
+        return Promise.reject('获取用户信息失败')
+      }
+    },
+    /**
+     * 退出登陆
+     */
+    logout() {
+      // 清空本地用户数据
+      this.token = ''
+      this.username = ''
+      this.avatar = ''
+      REMOVE_TOKEN()
+      //TODO 通知服务器用户唯一标识失效
     },
   },
   getters: {},

@@ -19,7 +19,6 @@
   const { flush } = storeToRefs(settingStore)
   // 监听仓库内部数据flush的是否发生变化
   watch(flush, () => {
-    console.log('监听到数据变化')
     // 点击刷新：路由组件销毁
     flag.value = false
     // 使用 nextTick 在dom更新后（组件销毁完成后）再重新渲染组件

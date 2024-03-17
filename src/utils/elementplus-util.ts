@@ -54,6 +54,7 @@ function showNotification(
     message: msg,
     type,
     title: title,
+    duration: 3000,
   })
 }
 

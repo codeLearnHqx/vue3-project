@@ -57,11 +57,12 @@
   import { User, Lock } from '@element-plus/icons-vue'
   import { FormInstance } from 'element-plus'
   import { reactive, ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
+  const router = useRouter()
+  const route = useRoute()
   // 表单对象
   const ruleFormRef = ref<FormInstance>()
-  const router = useRouter()
   // 用户仓库
   const userStore = useUserStore()
 
@@ -84,7 +85,8 @@
         loading.value = true
         try {
           await userStore.userLogin(loginForm)
-          router.replace('/')
+          // 如果重定向参数存在就跳转到指定页面
+          router.replace((route.query.redirect as string) || '/')
           notificationSuccess('欢迎回来', `HI，${getTime()}好`)
         } catch (error) {
           notificationError(error as string)

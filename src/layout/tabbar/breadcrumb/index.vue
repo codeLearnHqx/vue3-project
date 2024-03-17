@@ -1,6 +1,6 @@
 <template>
   <!-- 收缩图标 -->
-  <el-icon style="margin-right: 10px" @click="changeIcon">
+  <el-icon style="margin-right: 10px; cursor: pointer" @click="changeIcon">
     <!-- <Expand /> -->
     <!-- <Fold /> -->
     <!-- 通过component动态加载组件，true加载<Expand />，false加载<Fold />   -->

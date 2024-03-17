@@ -1,3 +1,4 @@
+import useUserStore from '@/store/modules/user'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 //创建axios实例
@@ -7,6 +8,12 @@ let request = axios.create({
 })
 //请求拦截器
 request.interceptors.request.use((config) => {
+  // 从仓库中获取到token
+  const userStore = useUserStore()
+  // 请求头设置token
+  if (userStore.token) {
+    config.headers.set('token', userStore.token)
+  }
   return config
 })
 //响应拦截器
