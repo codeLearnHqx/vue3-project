@@ -1,10 +1,10 @@
 import { RouterOptions, createRouter, createWebHashHistory } from 'vue-router'
-import { routes } from './routes'
+import { constantRoute } from './routes'
 
 // 路由器参数对象
 const options: RouterOptions = {
   history: createWebHashHistory(),
-  routes,
+  routes: constantRoute,
   // 设置路由切换后页面的水平、垂直滚动条位置
   scrollBehavior() {
     return {

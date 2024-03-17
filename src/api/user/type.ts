@@ -1,22 +1,23 @@
 /**
  * 登录接口
  */
-export interface loginForm {
+export interface LoginForm {
   username: string
   password: string
 }
-interface loginResponseDataType {
-  token: string
+interface LoginResponseDataType {
+  token?: string
+  message?: string
 }
-export interface loginResponseData {
+export interface LoginResponseData {
   code: number
-  data: loginResponseDataType
+  data: LoginResponseDataType
 }
 
 /**
  * 用户信息接口
  */
-interface userInfo {
+interface UserInfo {
   userId: number
   avatar: string
   username: string
@@ -27,11 +28,11 @@ interface userInfo {
   routes: Array<string>
   token: string
 }
-interface user {
-  checkUser?: userInfo
+interface User {
+  checkUser?: UserInfo
   message?: string
 }
-export interface userResponseData {
+export interface UserResponseData {
   code: number
-  data: user
+  data: User
 }

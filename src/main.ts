@@ -10,6 +10,7 @@ import 'virtual:svg-icons-register'
 // 引入自定义插件对象，用于统一注册全局组件
 import globalComponent from '@/components'
 import router from './router'
+import pinia from './store'
 
 const app = createApp(App)
 app.use(ElementPlus, {
@@ -19,5 +20,7 @@ app.use(ElementPlus, {
 app.use(globalComponent)
 // 注册路由
 app.use(router)
+// 注册pinia
+app.use(pinia)
 
 app.mount('#app')

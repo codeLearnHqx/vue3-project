@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RouterView />
+    <h1>权限菜单</h1>
   </div>
 </template>
 
