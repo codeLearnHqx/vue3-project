@@ -1,8 +1,9 @@
-import { reqLogin, reqUserInfo } from '@/api/user'
+import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 import type {
   LoginForm,
   LoginResponseData,
-  UserResponseData,
+  ResponseData,
+  UserInfoResponseData,
 } from '@/api/user/type'
 import { defineStore } from 'pinia'
 import { UserState } from './types/type'
@@ -29,24 +30,24 @@ const useUserStore = defineStore('User', {
       const res: LoginResponseData = await reqLogin(data)
       // 登录成功 200 -> token
       if (res.code === 200) {
-        this.token = res.data.token as string
+        this.token = res.data as string
         // 本地持久化一份数据
         SET_TOKEN(this.token)
         // 返回成功的Promise对象
         return 'ok'
       } else {
         // 登录失败 201 -> 登录失败信息
-        return Promise.reject(res.data.message)
+        return Promise.reject(res.data)
       }
     },
     /**
      * 获取用户信息
      */
     async userInfo() {
-      const res: UserResponseData = await reqUserInfo()
+      const res: UserInfoResponseData = await reqUserInfo()
       if (res.code === 200) {
-        this.username = res.data.checkUser?.username
-        this.avatar = res.data.checkUser?.avatar
+        this.username = res.data.name
+        this.avatar = res.data.avatar
         return 'ok'
       } else {
         return Promise.reject('获取用户信息失败')
@@ -55,13 +56,18 @@ const useUserStore = defineStore('User', {
     /**
      * 退出登陆
      */
-    logout() {
-      // 清空本地用户数据
-      this.token = ''
-      this.username = ''
-      this.avatar = ''
-      REMOVE_TOKEN()
-      //TODO 通知服务器用户唯一标识失效
+    async logout() {
+      //通知服务器用户唯一标识失效
+      const res: ResponseData = await reqLogout()
+      if (res.code === 200) {
+        // 清空本地用户数据
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        REMOVE_TOKEN()
+        return 'ok'
+      }
+      return Promise.reject(new Error(res.message))
     },
   },
   getters: {},

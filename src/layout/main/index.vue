@@ -32,7 +32,7 @@
   /* 路由切换过度动画 */
   .fade-enter-from {
     opacity: 0;
-    transform: scale(0);
+    transform: translateX(-20px);
   }
 
   .fade-enter-active {
@@ -41,6 +41,5 @@
 
   .fade-enter-to {
     opacity: 1;
-    transform: scale(1);
   }
 </style>

@@ -33,7 +33,7 @@
   import useUserStore from '@/store/modules/user'
   import { storeToRefs } from 'pinia'
   import { useRoute, useRouter } from 'vue-router'
-  import { toastSuccess } from '@/utils/elementplus-util'
+  import { toastError, toastSuccess } from '@/utils/elementplus-util'
 
   const { isFullscreen, enter, exit } = useFullscreen()
   const settingStore = useSettingStore()
@@ -69,15 +69,19 @@
     }
   }
   // 退出登陆按钮
-  function logout() {
-    userStore.logout()
-    router.push({
-      path: '/login',
-      query: {
-        redirect: route.path, // 需要重定向的路径
-      },
-    })
-    toastSuccess('退出成功')
+  async function logout() {
+    try {
+      await userStore.logout()
+      router.push({
+        path: '/login',
+        query: {
+          redirect: route.path, // 需要重定向的路径
+        },
+      })
+      toastSuccess('退出成功')
+    } catch (error) {
+      toastError(error as string)
+    }
   }
 </script>
 

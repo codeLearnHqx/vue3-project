@@ -39,7 +39,7 @@ router.beforeEach(async (to, _, next) => {
         } catch (error) {
           // token 过期，获取用户信息失败
           // 用户手动修改了本地 token
-          userStore.logout()
+          await userStore.logout()
           next({ path: '/login', query: { redirect: to.path } })
         }
       }

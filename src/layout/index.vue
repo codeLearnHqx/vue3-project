@@ -93,11 +93,12 @@
       position: absolute;
       width: calc(100% - $base-menu-width);
       height: calc(100vh - $base-tabber-height);
-      background-color: orange;
+      background-color: #eef0f3;
       left: $base-menu-width;
       top: $base-tabber-height;
       padding: 20px;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
       transition: all 0.3s;
       &.menu_fold {
         width: calc(100vw - $base-menu-min-width);
