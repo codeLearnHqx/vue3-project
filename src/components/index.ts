@@ -2,12 +2,14 @@ import { App, Component } from 'vue'
 // 项目中的全局组件
 import SvgIcon from './SvgIcon/index.vue'
 import Pagination from './Pagination/index.vue'
+import Category from './Category/index.vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue' // icon图标库
 
 // 自定义全局组件对象
 const allGlobalComponent: { [name: string]: Component } = {
   SvgIcon,
   Pagination,
+  Category,
 }
 
 /**
